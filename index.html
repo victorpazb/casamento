@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chave Pix</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('assets/background.jpg') no-repeat center center/cover;
+            flex-direction: column;
+            text-align: center;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            cursor: pointer;
+            color: #333;
+        }
+        img {
+            width: 200px;
+            height: 200px;
+            margin-top: 20px;
+        }
+        .pix-info {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <audio autoplay loop>
+        <source src="assets/musica.mp3" type="audio/mpeg">
+        Seu navegador não suporta áudio HTML5.
+    </audio>
+    
+    <h1 onclick="document.getElementById('pix-section').scrollIntoView({behavior: 'smooth'});">Clique aqui para ver a chave Pix</h1>
+    
+    <div id="pix-section" class="container">
+        <p class="pix-info">Chave Pix: SEU-DADO-AQUI</p>
+        <img src="assets/qrcode.png" alt="QR Code Pix">
+    </div>
+</body>
+</html>
+
