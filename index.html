@@ -3,12 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chave Pix</title>
+    <title>Amanda & Victor</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        .logo{
+            width: 400px;
+            height: 400px;
+            margin-bottom: 10px;
+
+
         }
         body {
             display: flex;
@@ -24,6 +32,9 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            margin-bottom: 20px;
+            margin-top: 20px;
         }
         h1 {
             cursor: pointer;
@@ -38,21 +49,91 @@
             margin-top: 10px;
             font-size: 18px;
             font-weight: bold;
+            margin-right: 10px;
+            margin: 10px;
         }
+
+        #pix-section {
+            display: none;
+        }
+        .my-link {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+
+        @keyframes blink {
+        0% {
+            color: purple;
+        }
+        25% {
+            color: pink;
+        }
+        50% {
+            color: purple;
+        }
+        75% {
+            color: pink;
+        }
+        100% {
+            color: purple;
+        }
+    }
+
+    .blink {
+        animation: blink 1s infinite; /* A animação vai durar 1 segundo e repetir infinitamente */
+    }
+        
     </style>
 </head>
 <body>
     <audio autoplay loop>
-        <source src="assets/musica.mp3" type="audio/mpeg">
-        Seu navegador não suporta áudio HTML5.
+        <source src="assets/voce_jogou.mp3" type="audio/mpeg">
     </audio>
     
-    <h1 onclick="document.getElementById('pix-section').scrollIntoView({behavior: 'smooth'});">Clique aqui para ver a chave Pix</h1>
     
-    <div id="pix-section" class="container">
-        <p class="pix-info">Chave Pix: SEU-DADO-AQUI</p>
-        <img src="assets/qrcode.png" alt="QR Code Pix">
+    <img id="logo" class="logo" src="assets/logo.png"/>
+    <a href="#" class="blink my-link"><h1 onclick="toggleDisplay()">LISTA DE PRESENTES</h1></a>
+
+
+    
+
+
+    <div id="pix-section" class="pix-section container">
+        <code class="pix-info">Na verdade, não temos uma lista de presentes. O que queremos mesmo é que você venha curtir uma feijoada com a gente e viver bons momentos! Mas, caso você realmente queira nos presentear e se sentir à vontade, pode fazer um Pix pelo QR Code ou pela chave abaixo. Fique à vontade para enviar o valor que desejar, qualquer contribuição será super bem-vinda e apreciada!</code>
     </div>
+
+    <div id="pix-section" class="pix-section container">
+        <code class="pix-info">Chave Pix: victorpazb@gmail.com</code>
+
+        <p class="pix-info"></p>
+        <img src="assets/qrcode.png" alt="QR Code Pix">
+        <br/>
+        <span><code>OU ESCANEIA ESSE <strong>QRCODE</strong></code></span>
+    </div>
+    
 </body>
+
+<script>
+    function toggleDisplay() {
+        const pixSections = document.getElementsByClassName('pix-section');
+        const logo = document.getElementById('logo');
+        const header = document.querySelector('h1');
+        
+        // Alterna a visibilidade de todas as seções com a classe 'pix-section'
+        for (let pixSection of pixSections) {
+            pixSection.style.display = pixSection.style.display === 'block' ? 'none' : 'block';
+        }
+        
+        // Alterna a visibilidade de 'logo'
+        logo.style.display = logo.style.display === 'none' ? 'block' : 'none';
+        
+        // Altera o texto do header dependendo da visibilidade da imagem
+        if (logo.style.display === 'none') {
+            header.textContent = 'NADA DE LISTA!!';
+        } else {
+            header.textContent = 'LISTA DE PRESENTES';
+        }
+    }
+</script>
 </html>
 
