@@ -11,13 +11,13 @@
             box-sizing: border-box;
         }
 
-        .logo{
+        .logo {
             width: 400px;
             height: 400px;
             margin-bottom: 10px;
-
-
+            margin-left: 20px; /* Ajuste para mover a imagem para a direita */
         }
+
         body {
             display: flex;
             justify-content: center;
@@ -26,25 +26,33 @@
             background: url('assets/background.png') no-repeat center center/cover;
             flex-direction: column;
             text-align: center;
+            font-family: 'Courier New', Courier, monospace; /* Fonte inicial */
         }
+
         .container {
             background: rgba(255, 255, 255, 0.8);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 400px;
+            width: 90%; /* Ajuste para ocupar 90% da largura da tela */
+            max-width: 400px; /* Limita a largura máxima */
             margin-bottom: 20px;
             margin-top: 20px;
+            margin-left: 10px; /* Ajuste para descolar da borda esquerda */
+            margin-right: 10px; /* Ajuste para descolar da borda direita */
         }
+
         h1 {
             cursor: pointer;
             color: #333;
         }
+
         img {
             width: 200px;
             height: 200px;
             margin-top: 20px;
         }
+
         .pix-info {
             margin-top: 10px;
             font-size: 18px;
@@ -56,47 +64,85 @@
         #pix-section {
             display: none;
         }
+
         .my-link {
             font-size: 20px;
             margin-top: 20px;
         }
 
         @keyframes blink {
-        0% {
-            color: purple;
+            0% {
+                color: purple;
+            }
+            25% {
+                color: pink;
+            }
+            50% {
+                color: purple;
+            }
+            75% {
+                color: pink;
+            }
+            100% {
+                color: purple;
+            }
         }
-        25% {
-            color: pink;
-        }
-        50% {
-            color: purple;
-        }
-        75% {
-            color: pink;
-        }
-        100% {
-            color: purple;
-        }
-    }
 
-    .blink {
-        animation: blink 1s infinite; /* A animação vai durar 1 segundo e repetir infinitamente */
-    }
-        
+        .blink {
+            animation: blink 1s infinite; /* A animação vai durar 1 segundo e repetir infinitamente */
+        }
+
+        /* Estilo Tim Burton para o título */
+        .tim-burton-title {
+            font-family: 'Creepster', cursive; /* Fonte gótica */
+            font-size: 48px;
+            color: #8B0000; /* Vermelho escuro */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 10px;
+            letter-spacing: 2px; /* Espaçamento entre letras */
+            background: rgba(255, 255, 255, 0.8); /* Fundo semitransparente */
+            padding: 10px 20px; /* Espaçamento interno */
+            border-radius: 10px; /* Bordas arredondadas */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+        }
+
+        /* Ajustes para telas menores (celulares) */
+        @media (max-width: 600px) {
+            .logo {
+                width: 300px; /* Reduz o tamanho da logo em telas menores */
+                height: 300px;
+                margin-left: 10px; /* Ajuste menor para telas pequenas */
+            }
+
+            .container {
+                width: 95%; /* Ocupa mais espaço na tela */
+                margin-left: 5px; /* Ajuste menor para telas pequenas */
+                margin-right: 5px;
+            }
+
+            .tim-burton-title {
+                font-size: 36px; /* Reduz o tamanho da fonte em telas menores */
+                padding: 8px 16px; /* Reduz o padding em telas menores */
+            }
+        }
     </style>
+    <!-- Importando a fonte "Creepster" do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
 </head>
 <body>
-    <audio autoplay loop>
+    <!-- Áudio sem autoplay -->
+    <audio id="backgroundMusic" loop>
         <source src="assets/voce_jogou.mp3" type="audio/mpeg">
+        Seu navegador não suporta o elemento de áudio.
     </audio>
-    
-    
-    <img id="logo" class="logo" src="assets/logo.png"/>
-    <a href="#" class="blink my-link"><h1 onclick="toggleDisplay()">LISTA DE PRESENTES</h1></a>
 
+    <!-- Título com temática Tim Burton -->
+    <div id="title" class="tim-burton-title">Amanda & Victor</div>
 
-    
-
+    <img id="logo" class="logo" src="assets/logo.png" />
+    <a href="#" id="button" class="blink my-link">
+        <h1 onclick="toggleDisplay()">LISTA DE PRESENTES</h1>
+    </a>
 
     <div id="pix-section" class="pix-section container">
         <code class="pix-info">Na verdade, não temos uma lista de presentes. O que queremos mesmo é que você venha curtir uma feijoada com a gente e viver bons momentos! Mas, caso você realmente queira nos presentear e se sentir à vontade, pode fazer um Pix pelo QR Code ou pela chave abaixo. Fique à vontade para enviar o valor que desejar, qualquer contribuição será super bem-vinda e apreciada!</code>
@@ -104,36 +150,47 @@
 
     <div id="pix-section" class="pix-section container">
         <code class="pix-info">Chave Pix: victorpazb@gmail.com</code>
-
         <p class="pix-info"></p>
         <img src="assets/qrcode.png" alt="QR Code Pix">
-        <br/>
+        <br />
         <span><code>OU ESCANEIA ESSE <strong>QRCODE</strong></code></span>
     </div>
-    
+
+    <script>
+        // Seleciona o botão e o elemento de áudio
+        const button = document.getElementById('button');
+        const backgroundMusic = document.getElementById('backgroundMusic');
+
+        // Adiciona um evento de clique ao botão
+        button.addEventListener('click', () => {
+            // Toca a música se estiver pausada
+            if (backgroundMusic.paused) {
+                backgroundMusic.play();
+            }
+        });
+
+        function toggleDisplay() {
+            const pixSections = document.getElementsByClassName('pix-section');
+            const logo = document.getElementById('logo');
+            const header = document.querySelector('h1');
+            const title = document.getElementById('title'); // Seleciona o título
+
+            // Alterna a visibilidade de todas as seções com a classe 'pix-section'
+            for (let pixSection of pixSections) {
+                pixSection.style.display = pixSection.style.display === 'block' ? 'none' : 'block';
+            }
+
+            // Alterna a visibilidade de 'logo' e 'title'
+            logo.style.display = logo.style.display === 'none' ? 'block' : 'none';
+            title.style.display = title.style.display === 'none' ? 'block' : 'none';
+
+            // Altera o texto do header dependendo da visibilidade da imagem
+            if (logo.style.display === 'none') {
+                header.textContent = 'NADA DE LISTA!!';
+            } else {
+                header.textContent = 'LISTA DE PRESENTES';
+            }
+        }
+    </script>
 </body>
-
-<script>
-    function toggleDisplay() {
-        const pixSections = document.getElementsByClassName('pix-section');
-        const logo = document.getElementById('logo');
-        const header = document.querySelector('h1');
-        
-        // Alterna a visibilidade de todas as seções com a classe 'pix-section'
-        for (let pixSection of pixSections) {
-            pixSection.style.display = pixSection.style.display === 'block' ? 'none' : 'block';
-        }
-        
-        // Alterna a visibilidade de 'logo'
-        logo.style.display = logo.style.display === 'none' ? 'block' : 'none';
-        
-        // Altera o texto do header dependendo da visibilidade da imagem
-        if (logo.style.display === 'none') {
-            header.textContent = 'NADA DE LISTA!!';
-        } else {
-            header.textContent = 'LISTA DE PRESENTES';
-        }
-    }
-</script>
 </html>
-
